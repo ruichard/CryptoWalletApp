@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { DetailsScreen } from './src/screens/DetailsScreen';
 import { RegistrationScreen } from './src/screens/RegistrationScreen';
+import * as Constants from './src/Constants';
 
 const Stack = createStackNavigator();
 
@@ -13,16 +14,16 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Home"
+          name={Constants.SCREEN_HOME}
           component={HomeScreen}
           options={{ title: 'Crypto Currency Wallet' }} />
 
         <Stack.Screen
-          name="Registration"
+          name={Constants.SCREEN_REGISTRATION}
           component={RegistrationScreen} />
 
         <Stack.Screen
-          name="Details"
+          name={Constants.SCREEN_DETAILS}
           component={DetailsScreen} />
 
       </Stack.Navigator>

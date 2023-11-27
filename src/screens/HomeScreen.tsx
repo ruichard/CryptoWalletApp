@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Button, Text, StyleSheet } from 'react-native';
+import { View, Button } from 'react-native';
+import { SCREEN_REGISTRATION } from '../Constants';
 
 export function HomeScreen(props: any) {
     return (
@@ -7,7 +8,7 @@ export function HomeScreen(props: any) {
             <Button
                 title="Create Wallet"
                 onPress={() => {
-                    props.navigation.navigate('Registration')
+                    props.navigation.navigate(SCREEN_REGISTRATION)
                 }
                 }
             />
