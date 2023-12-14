@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from '../ok-ethers';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet,InteractionManager } from 'react-native';
 
 export function DetailsScreen({ route, navigation }: any) {
 
     const { mnemonic } = route.params;
     const [walletAddress, setWalletAddress] = useState('');
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => {
-        (async () => {
+        InteractionManager.runAfterInteractions(async () => {
             try {
-                const wallet = await ethers.Wallet.fromPhrase(mnemonic);
-                setWalletAddress(wallet.address);
+              const wallet = await ethers.Wallet.fromPhrase(mnemonic);
+              setWalletAddress(wallet.address);
             } catch (error) {
-                console.error(error);
+              console.error(error);
             } finally {
-                setLoading(false);
+              setLoading(false);
             }
-        })();
+          });
     }, []);
 
     return (
