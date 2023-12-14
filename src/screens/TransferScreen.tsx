@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { ethers } from '../ok-ethers';
 import { SafeAreaView, Text, Button, TextInput, StyleSheet,InteractionManager } from 'react-native';
 import EthereumService, { GasFee } from '../services/EthereumService';
 import { Card } from 'react-native-paper';
@@ -8,20 +7,13 @@ export function TransferScreen({ route }: any) {
   const [text, onChangeText] = useState('');
   const [number, onChangeNumber] = useState('');
   const [gasFee, setGasFee] = useState<GasFee>();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     InteractionManager.runAfterInteractions(async () => {
-        try {
           const gasFee = await EthereumService.getGasFee()
           if (gasFee) {
             setGasFee(gasFee);
           }
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
       });
 }, []);
 
