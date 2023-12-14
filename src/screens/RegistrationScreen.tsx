@@ -5,9 +5,10 @@ import '../../shim.js';
 import crypto from 'crypto'
 import { Card } from 'react-native-paper';
 import { SCREEN_DETAILS } from '../Constants';
+import { useMnemonic } from '../contexts/MnemonicContext';
 
 export function RegistrationScreen(props: any) {
-    const [mnemonic, setMnemonic] = useState('');
+    const {mnemonic, setMnemonic} = useMnemonic();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -38,9 +39,7 @@ export function RegistrationScreen(props: any) {
             <Button
               title="Enter Wallet"
               onPress={() => {
-                props.navigation.navigate(SCREEN_DETAILS, {
-                  mnemonic: mnemonic,
-                });
+                props.navigation.navigate(SCREEN_DETAILS);
               }}
             />
           </>

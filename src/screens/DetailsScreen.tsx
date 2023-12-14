@@ -3,10 +3,11 @@ import { ethers } from '../ok-ethers';
 import { View, Text, Button, ActivityIndicator, StyleSheet,InteractionManager } from 'react-native';
 import EthereumService from '../services/EthereumService';
 import { SCREEN_TRANSFER } from '../Constants';
+import { useMnemonic } from '../contexts/MnemonicContext';
 
 export function DetailsScreen({ route, navigation }: any) {
 
-    const { mnemonic } = route.params;
+    const {mnemonic} = useMnemonic();
     const [walletAddress, setWalletAddress] = useState('');
     const [balance, setBalance] = useState('')
     const [loading, setLoading] = useState(true);

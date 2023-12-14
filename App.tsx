@@ -6,11 +6,13 @@ import { DetailsScreen } from './src/screens/DetailsScreen';
 import { RegistrationScreen } from './src/screens/RegistrationScreen';
 import { TransferScreen } from './src/screens/TransferScreen';
 import * as Constants from './src/Constants';
+import { MnemonicProvider } from './src/contexts/MnemonicContext';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    <MnemonicProvider>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -32,5 +34,6 @@ export default function App() {
 
       </Stack.Navigator>
     </NavigationContainer>
+    </MnemonicProvider>
   );
 }
