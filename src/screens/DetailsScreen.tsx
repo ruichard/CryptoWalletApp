@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from '../ok-ethers';
-import { View, Text, ActivityIndicator, StyleSheet,InteractionManager } from 'react-native';
+import { View, Text, Button, ActivityIndicator, StyleSheet,InteractionManager } from 'react-native';
+import EthereumService from '../services/EthereumService';
+import { SCREEN_TRANSFER } from '../Constants';
 
 export function DetailsScreen({ route, navigation }: any) {
 
     const { mnemonic } = route.params;
     const [walletAddress, setWalletAddress] = useState('');
+    const [balance, setBalance] = useState('')
     const [loading, setLoading] = useState(true);
     
     useEffect(() => {
         InteractionManager.runAfterInteractions(async () => {
             try {
               const wallet = await ethers.Wallet.fromPhrase(mnemonic);
+              const balance = await EthereumService.getBalance(wallet.address)
+
               setWalletAddress(wallet.address);
+              setBalance(balance);
+              
             } catch (error) {
               console.error(error);
             } finally {
@@ -20,6 +27,10 @@ export function DetailsScreen({ route, navigation }: any) {
             }
           });
     }, []);
+
+    const handleTransferPress = () => {
+        navigation.navigate(SCREEN_TRANSFER);
+    };
 
     return (
         <View style={styles.container}>
@@ -29,6 +40,12 @@ export function DetailsScreen({ route, navigation }: any) {
                 <>
                     <Text style={styles.Tips}>Your WalletAddress</Text>
                     <Text style={styles.addressText}>{walletAddress}</Text>
+                    <Text style={styles.Tips}>Your Balance</Text>
+                    <Text style={styles.addressText}>{balance}</Text>
+                    <Button
+                        title="Transfer"
+                        onPress={handleTransferPress}
+                        />
                 </>
             )}
         </View>
@@ -44,7 +61,7 @@ const styles = StyleSheet.create({
     },
     addressText: {
         color: 'blue',
-        fontSize: 16,
+        fontSize: 14,
     },
     Tips: {
         color: 'black',

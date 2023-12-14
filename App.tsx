@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { DetailsScreen } from './src/screens/DetailsScreen';
 import { RegistrationScreen } from './src/screens/RegistrationScreen';
+import { TransferScreen } from './src/screens/TransferScreen';
 import * as Constants from './src/Constants';
 
 const Stack = createStackNavigator();
@@ -24,6 +25,10 @@ export default function App() {
         <Stack.Screen
           name={Constants.SCREEN_DETAILS}
           component={DetailsScreen} />
+
+        <Stack.Screen
+          name={Constants.SCREEN_TRANSFER}
+          component={TransferScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
